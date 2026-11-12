@@ -1,0 +1,19 @@
+# Webcam hand tracking (MediaPipe HandLandmarker).
+kind = "source"
+description = "Webcam hand tracking (OpenCV + MediaPipe)"
+version = "1.0.0"
+python = [
+  "mediapipe",
+  "opencv-contrib-python",   # provides cv2; the same build mediapipe itself depends on
+]
+system = ["macOS: allow camera access for your terminal the first time it opens"]
+
+[[assets]]
+file   = "hand_landmarker.task"
+url    = "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task"
+sha256 = "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+
+[[assets]]   # used by the standalone gesture_tracker.py prototype
+file   = "gesture_recognizer.task"
+url    = "https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task"
+sha256 = "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"

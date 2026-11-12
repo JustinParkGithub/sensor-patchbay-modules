@@ -1,0 +1,222 @@
+{
+  "name": "controller-mouse-keyboard",
+  "description": "Any controller as keyboard + mouse: d-pad/left stick are arrows, face buttons keys, right stick the mouse",
+  "requires": [
+    {
+      "id": "controller",
+      "kind": "source",
+      "types": [
+        "controller"
+      ]
+    },
+    {
+      "id": "hid",
+      "kind": "sink",
+      "types": [
+        "hid"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "g_up",
+      "source": "controller/dpad.up",
+      "sink": "hid/key.up",
+      "chain": []
+    },
+    {
+      "id": "g_down",
+      "source": "controller/dpad.down",
+      "sink": "hid/key.down",
+      "chain": []
+    },
+    {
+      "id": "g_lft",
+      "source": "controller/dpad.left",
+      "sink": "hid/key.left",
+      "chain": []
+    },
+    {
+      "id": "g_rgt",
+      "source": "controller/dpad.right",
+      "sink": "hid/key.right",
+      "chain": []
+    },
+    {
+      "id": "g_space",
+      "source": "controller/btn.a",
+      "sink": "hid/key.space",
+      "chain": []
+    },
+    {
+      "id": "g_esc",
+      "source": "controller/btn.b",
+      "sink": "hid/key.esc",
+      "chain": []
+    },
+    {
+      "id": "g_e",
+      "source": "controller/btn.x",
+      "sink": "hid/key.e",
+      "chain": []
+    },
+    {
+      "id": "g_tab",
+      "source": "controller/btn.y",
+      "sink": "hid/key.tab",
+      "chain": []
+    },
+    {
+      "id": "g_left",
+      "source": "controller/btn.lb",
+      "sink": "hid/mouse.left",
+      "chain": []
+    },
+    {
+      "id": "g_right",
+      "source": "controller/btn.rb",
+      "sink": "hid/mouse.right",
+      "chain": []
+    },
+    {
+      "id": "g_enter",
+      "source": "controller/btn.start",
+      "sink": "hid/key.enter",
+      "chain": []
+    },
+    {
+      "id": "g_preset",
+      "source": "controller/btn.back",
+      "sink": "sys/preset.cycle",
+      "chain": []
+    },
+    {
+      "id": "g_ls_up",
+      "source": "controller/stick.ly",
+      "sink": "hid/key.up",
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": 0.5,
+            "off": 0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "g_ls_down",
+      "source": "controller/stick.ly",
+      "sink": "hid/key.down",
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": -0.5,
+            "off": -0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "g_ls_left",
+      "source": "controller/stick.lx",
+      "sink": "hid/key.left",
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": -0.5,
+            "off": -0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "g_ls_right",
+      "source": "controller/stick.lx",
+      "sink": "hid/key.right",
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": 0.5,
+            "off": 0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "g_dx",
+      "source": "controller/stick.rx",
+      "sink": "hid/mouse.dx",
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.12
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.5
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1400.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "g_dy",
+      "source": "controller/stick.ry",
+      "sink": "hid/mouse.dy",
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.12
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.5
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1400.0
+          }
+        },
+        {
+          "type": "invert",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "id": "g_rt",
+      "source": "controller/btn.rt",
+      "sink": "hid/mouse.left",
+      "chain": []
+    },
+    {
+      "id": "g_lt",
+      "source": "controller/btn.lt",
+      "sink": "hid/mouse.right",
+      "chain": []
+    },
+    {
+      "id": "g_middle",
+      "source": "controller/btn.rs",
+      "sink": "hid/mouse.middle",
+      "chain": []
+    }
+  ]
+}

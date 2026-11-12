@@ -1,0 +1,36 @@
+# Keeps index.json in step with the module folders. On a pull request it fails
+# if the index is stale; on main it regenerates and commits it, so a merged
+# module is installable from the catalog straight away.
+name: Index
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check (pull requests)
+        if: github.event_name == 'pull_request'
+        run: python tools/build_index.py --check
+
+      - name: Rebuild and commit (main)
+        if: github.event_name == 'push'
+        run: |
+          python tools/build_index.py
+          if ! git diff --quiet index.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898812+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Rebuild index.json" index.json
+            git push
+          fi

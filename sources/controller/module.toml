@@ -1,0 +1,12 @@
+# Any game controller via SDL2: Xbox, PlayStation, Switch, 8BitDo, Steam, DInput.
+kind = "source"
+description = "Any game controller via SDL2: Xbox, PlayStation, Switch Pro / Joy-Con, 8BitDo, generic; motion + touchpad where the pad has them"
+version = "1.0.0"
+python = [
+  "pysdl2>=0.9.16",       # imported as `sdl2`
+  "pysdl2-dll>=2.30",     #   ships the SDL2 shared library itself
+]
+system = [
+  "pair over Bluetooth or plug in over USB",
+  "Linux: user access to /dev/input/event* and /dev/hidraw* (the `input` group, or a uaccess udev rule) - hidraw is what gives SDL motion and touchpad on PlayStation and Switch pads",
+]

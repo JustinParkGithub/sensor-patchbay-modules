@@ -1,0 +1,265 @@
+{
+ "format": 1,
+ "modules": [
+  {
+   "name": "bend4",
+   "kind": "source",
+   "description": "Arduino Nano + four flex sensors over USB serial",
+   "version": "1.0.0",
+   "entry": "__init__.py",
+   "depends": [],
+   "python": [
+    "pyserial>=3.5"
+   ],
+   "system": [
+    "flash firmware/bend4_nano/bend4_nano.ino",
+    "Linux: your user in the `dialout` group for serial access"
+   ],
+   "digest": "45156cf587156416bc94f97bb175eb0d2f5f13667ab30c36f9e15fce102489b1",
+   "files": [
+    {
+     "path": "sources/bend4/__init__.py",
+     "sha256": "ef2cfc329232e43050118ae4f07a1461dcf0f98553996bd637253cf57edabd10",
+     "size": 9518
+    },
+    {
+     "path": "sources/bend4/firmware/bend4_nano/bend4_nano.ino",
+     "sha256": "f3ada2ea80313146787253e5bfb7c1d0e7d56e96cf8a3d7200ddfe8f1a8fa092",
+     "size": 1434
+    },
+    {
+     "path": "sources/bend4/module.toml",
+     "sha256": "4332b89f8d348498621c60ce0dc2a56f91d7e0dbff111f6cd9154d6c32917d90",
+     "size": 321
+    }
+   ]
+  },
+  {
+   "name": "controller",
+   "kind": "source",
+   "description": "Any game controller via SDL2: Xbox, PlayStation, Switch Pro / Joy-Con, 8BitDo, generic; motion + touchpad where the pad has them",
+   "version": "1.0.0",
+   "entry": "__init__.py",
+   "depends": [],
+   "python": [
+    "pysdl2>=0.9.16",
+    "pysdl2-dll>=2.30"
+   ],
+   "system": [
+    "pair over Bluetooth or plug in over USB",
+    "Linux: user access to /dev/input/event* and /dev/hidraw* (the `input` group, or a uaccess udev rule) - hidraw is what gives SDL motion and touchpad on PlayStation and Switch pads"
+   ],
+   "digest": "4717c019ac3e16513f90950d8363bee35988d06c0c91219dca79053c2722bc5b",
+   "files": [
+    {
+     "path": "sources/controller/README.md",
+     "sha256": "bf7ace60f7a5a6a994a80808e5db18c62e1c7464e36cc1b71f5214a7247512c0",
+     "size": 5051
+    },
+    {
+     "path": "sources/controller/__init__.py",
+     "sha256": "34c52b010a4c913b4e3e7080a07b98809fbf8c3e994ac4bacbc6c048b6a99d03",
+     "size": 18556
+    },
+    {
+     "path": "sources/controller/module.toml",
+     "sha256": "27cd2cbba14e8094505b06b4e7dc588da022a826708ebd70d20b2afc88505fff",
+     "size": 630
+    }
+   ]
+  },
+  {
+   "name": "cv",
+   "kind": "source",
+   "description": "Webcam hand tracking (OpenCV + MediaPipe)",
+   "version": "1.0.0",
+   "entry": "__init__.py",
+   "depends": [],
+   "python": [
+    "mediapipe",
+    "opencv-contrib-python"
+   ],
+   "system": [
+    "macOS: allow camera access for your terminal the first time it opens"
+   ],
+   "digest": "73a3ecbe04720f651b73b7312851ec40e194ec4a2e3baeaa5cb8373d73b86da4",
+   "files": [
+    {
+     "path": "sources/cv/README.md",
+     "sha256": "d2bfad3eace8f7db65ca41fdcd70f4ee3237c35a8273eef7a18850dd15d6aad7",
+     "size": 1057
+    },
+    {
+     "path": "sources/cv/TODO.md",
+     "sha256": "3298e3a646e3b4df6558e5d1d83d87690f5fced90bce3b9345e5d8b484bd0d4e",
+     "size": 208
+    },
+    {
+     "path": "sources/cv/__init__.py",
+     "sha256": "b9fe9ef8f7e89bbd50c603570905b15c99da5014531f05eae4b15d5c07cb5e62",
+     "size": 8611
+    },
+    {
+     "path": "sources/cv/gesture_tracker.py",
+     "sha256": "80edfc699e0c2a7cef7a8363a3a9256f9f4259a69f83682ff9c6d3a3437f0690",
+     "size": 12094
+    },
+    {
+     "path": "sources/cv/hand_tracker.py",
+     "sha256": "d14faf4e49b16ef070895a72b7668e6c5b8eafb3daf5763feb3218e00f6bb224",
+     "size": 7178
+    },
+    {
+     "path": "sources/cv/module.toml",
+     "sha256": "5b3d8aab769cae1fa3e42d7a9a4b19c97251df42bba01afbf7428a4b56b7fb3d",
+     "size": 893
+    }
+   ]
+  },
+  {
+   "name": "hid",
+   "kind": "sink",
+   "description": "Virtual mouse + keyboard (pynput)",
+   "version": "1.0.0",
+   "entry": "__init__.py",
+   "depends": [],
+   "python": [
+    "pynput>=1.7.6"
+   ],
+   "system": [
+    "macOS: grant Accessibility to your terminal/IDE (System Settings > Privacy & Security)",
+    "Linux: an X11 session, or uinput access for Wayland/headless"
+   ],
+   "digest": "b9f3c67440ec1ae38b2e47c6634dcd3435827cae76d3c0b45798a612241b0763",
+   "files": [
+    {
+     "path": "sinks/hid/__init__.py",
+     "sha256": "baf0d86635c45ca855185202e1f5af96cdb9701e19f74385212169920fc22011",
+     "size": 8222
+    },
+    {
+     "path": "sinks/hid/module.toml",
+     "sha256": "cc24791fe9e1bd68e4f01c77766146c3882bead8c6a3ef05b6530477129f7f36",
+     "size": 319
+    }
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "name": "bend4-mouse-keyboard",
+   "description": "Four flex sensors: bend to look left/right, walk forward and jump",
+   "requires": [
+    {
+     "id": "bend4",
+     "kind": "source",
+     "types": [
+      "bend4"
+     ]
+    },
+    {
+     "id": "hid",
+     "kind": "sink",
+     "types": [
+      "hid"
+     ]
+    }
+   ],
+   "path": "presets/bend4-mouse-keyboard.json",
+   "sha256": "7bea974ff7b4154fa8a1c6f69d6c830ef8a5fc6ebbfc206bc02fa5d9c0d04788",
+   "size": 2330
+  },
+  {
+   "name": "controller-air-mouse",
+   "description": "Air mouse: point a motion controller (PlayStation, Switch) to move the cursor; RT/ZR clicks, a flick goes forward",
+   "requires": [
+    {
+     "id": "controller",
+     "kind": "source",
+     "types": [
+      "controller"
+     ]
+    },
+    {
+     "id": "hid",
+     "kind": "sink",
+     "types": [
+      "hid"
+     ]
+    }
+   ],
+   "path": "presets/controller-air-mouse.json",
+   "sha256": "6e69805df24079564f9791d73735be689f8742768fbe79f46ad6ad3b5815826c",
+   "size": 3439
+  },
+  {
+   "name": "controller-mouse-keyboard",
+   "description": "Any controller as keyboard + mouse: d-pad/left stick are arrows, face buttons keys, right stick the mouse",
+   "requires": [
+    {
+     "id": "controller",
+     "kind": "source",
+     "types": [
+      "controller"
+     ]
+    },
+    {
+     "id": "hid",
+     "kind": "sink",
+     "types": [
+      "hid"
+     ]
+    }
+   ],
+   "path": "presets/controller-mouse-keyboard.json",
+   "sha256": "4a3e15b57e87dbebeb16e3352f5968b25ae10f05b6f22359ba022345dfe504ab",
+   "size": 4273
+  },
+  {
+   "name": "controller-mouse",
+   "description": "Mouse from the right stick, plus the PlayStation touchpad as a trackpad; triggers click",
+   "requires": [
+    {
+     "id": "controller",
+     "kind": "source",
+     "types": [
+      "controller"
+     ]
+    },
+    {
+     "id": "hid",
+     "kind": "sink",
+     "types": [
+      "hid"
+     ]
+    }
+   ],
+   "path": "presets/controller-mouse.json",
+   "sha256": "8c4f8b23d864184bc4a25a4bf0cec9e9d23da703ec965be1590b26a46df03d1f",
+   "size": 4031
+  },
+  {
+   "name": "controller-tilt-keys",
+   "description": "Tilt a motion controller for WASD, A for space, shake for Esc",
+   "requires": [
+    {
+     "id": "controller",
+     "kind": "source",
+     "types": [
+      "controller"
+     ]
+    },
+    {
+     "id": "hid",
+     "kind": "sink",
+     "types": [
+      "hid"
+     ]
+    }
+   ],
+   "path": "presets/controller-tilt-keys.json",
+   "sha256": "ceab1a50122ed59c4b6f4c7b8e0acf838a0cea9401b11236fd8660ea6bdbf4f0",
+   "size": 2278
+  }
+ ]
+}

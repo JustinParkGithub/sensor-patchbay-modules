@@ -1,0 +1,130 @@
+{
+  "name": "bend4-mouse-keyboard",
+  "description": "Four flex sensors: bend to look left/right, walk forward and jump",
+  "requires": [
+    {
+      "id": "bend4",
+      "kind": "source",
+      "types": [
+        "bend4"
+      ]
+    },
+    {
+      "id": "hid",
+      "kind": "sink",
+      "types": [
+        "hid"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "look_right",
+      "source": "bend4/bend.3",
+      "sink": "hid/mouse.dx",
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.12
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.4
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1400.0
+          }
+        },
+        {
+          "type": "clamp",
+          "params": {
+            "lo": 0.0,
+            "hi": 2000.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "look_left",
+      "source": "bend4/bend.2",
+      "sink": "hid/mouse.dx",
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.12
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.4
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1400.0
+          }
+        },
+        {
+          "type": "invert",
+          "params": {}
+        },
+        {
+          "type": "clamp",
+          "params": {
+            "lo": -2000.0,
+            "hi": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "walk_forward",
+      "source": "bend4/bend.0",
+      "sink": "hid/key.w",
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": 0.5,
+            "off": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "jump",
+      "source": "bend4/bend.1",
+      "sink": "hid/key.space",
+      "chain": [
+        {
+          "type": "threshold",
+          "params": {
+            "level": 0.5,
+            "mode": "gt"
+          }
+        },
+        {
+          "type": "debounce",
+          "params": {
+            "ms": 400.0
+          }
+        },
+        {
+          "type": "hold",
+          "params": {
+            "ms": 60.0
+          }
+        }
+      ]
+    }
+  ]
+}

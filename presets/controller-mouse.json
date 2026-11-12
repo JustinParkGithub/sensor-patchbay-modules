@@ -1,0 +1,211 @@
+{
+  "name": "controller-mouse",
+  "description": "Mouse from the right stick, plus the PlayStation touchpad as a trackpad; triggers click",
+  "requires": [
+    {
+      "id": "controller",
+      "kind": "source",
+      "types": [
+        "controller"
+      ]
+    },
+    {
+      "id": "hid",
+      "kind": "sink",
+      "types": [
+        "hid"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "d_dx",
+      "source": "controller/stick.rx",
+      "sink": "hid/mouse.dx",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.12
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.5
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1400.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "d_dy",
+      "source": "controller/stick.ry",
+      "sink": "hid/mouse.dy",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.12
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.5
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1400.0
+          }
+        },
+        {
+          "type": "invert",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "id": "d_tdx",
+      "source": "controller/touch.dx",
+      "sink": "hid/mouse.dx",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "scale",
+          "params": {
+            "factor": 2300.0
+          }
+        },
+        {
+          "type": "clamp",
+          "params": {
+            "lo": -6000.0,
+            "hi": 6000.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "d_tdy",
+      "source": "controller/touch.dy",
+      "sink": "hid/mouse.dy",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "scale",
+          "params": {
+            "factor": 2300.0
+          }
+        },
+        {
+          "type": "clamp",
+          "params": {
+            "lo": -6000.0,
+            "hi": 6000.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "d_left",
+      "source": "controller/trig.r",
+      "sink": "hid/mouse.left",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": 0.5,
+            "off": 0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "d_right",
+      "source": "controller/trig.l",
+      "sink": "hid/mouse.right",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": 0.5,
+            "off": 0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "d_padclick",
+      "source": "controller/btn.touchpad",
+      "sink": "hid/mouse.left",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "d_middle",
+      "source": "controller/btn.rs",
+      "sink": "hid/mouse.middle",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "d_back",
+      "source": "controller/btn.lb",
+      "sink": "hid/mouse.btn_back",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "d_forward",
+      "source": "controller/btn.rb",
+      "sink": "hid/mouse.btn_forward",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "d_wheel",
+      "source": "controller/stick.ly",
+      "sink": "hid/mouse.wheel",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.2
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 8.0
+          }
+        },
+        {
+          "type": "rate_limit",
+          "params": {
+            "per_sec": 100.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "d_preset",
+      "source": "controller/btn.guide",
+      "sink": "sys/preset.cycle",
+      "enabled": true,
+      "chain": []
+    }
+  ]
+}

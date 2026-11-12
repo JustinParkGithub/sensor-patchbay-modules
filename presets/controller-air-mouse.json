@@ -1,0 +1,182 @@
+{
+  "name": "controller-air-mouse",
+  "description": "Air mouse: point a motion controller (PlayStation, Switch) to move the cursor; RT/ZR clicks, a flick goes forward",
+  "requires": [
+    {
+      "id": "controller",
+      "kind": "source",
+      "types": [
+        "controller"
+      ]
+    },
+    {
+      "id": "hid",
+      "kind": "sink",
+      "types": [
+        "hid"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "m_dx",
+      "source": "controller/gyro.y",
+      "sink": "hid/mouse.dx",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "scale",
+          "params": {
+            "factor": 0.006
+          }
+        },
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.04
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.45
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1600
+          }
+        },
+        {
+          "type": "invert",
+          "params": {}
+        },
+        {
+          "type": "clamp",
+          "params": {
+            "lo": -2500,
+            "hi": 2500
+          }
+        }
+      ]
+    },
+    {
+      "id": "m_dy",
+      "source": "controller/gyro.x",
+      "sink": "hid/mouse.dy",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "scale",
+          "params": {
+            "factor": 0.006
+          }
+        },
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.04
+          }
+        },
+        {
+          "type": "expo",
+          "params": {
+            "amount": 0.45
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 1600
+          }
+        },
+        {
+          "type": "invert",
+          "params": {}
+        },
+        {
+          "type": "clamp",
+          "params": {
+            "lo": -2500,
+            "hi": 2500
+          }
+        }
+      ]
+    },
+    {
+      "id": "m_left",
+      "source": "controller/btn.rt",
+      "sink": "hid/mouse.left",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "m_right",
+      "source": "controller/btn.rb",
+      "sink": "hid/mouse.right",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "m_wheel",
+      "source": "controller/stick.ry",
+      "sink": "hid/mouse.wheel",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "deadzone",
+          "params": {
+            "threshold": 0.2
+          }
+        },
+        {
+          "type": "scale",
+          "params": {
+            "factor": 8
+          }
+        },
+        {
+          "type": "rate_limit",
+          "params": {
+            "per_sec": 100
+          }
+        }
+      ]
+    },
+    {
+      "id": "m_flick",
+      "source": "controller/accel.mag",
+      "sink": "hid/mouse.btn_forward",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "threshold",
+          "params": {
+            "level": 2.2,
+            "mode": "gt"
+          }
+        },
+        {
+          "type": "debounce",
+          "params": {
+            "ms": 500
+          }
+        },
+        {
+          "type": "hold",
+          "params": {
+            "ms": 80
+          }
+        }
+      ]
+    },
+    {
+      "id": "m_preset",
+      "source": "controller/btn.guide",
+      "sink": "sys/preset.cycle",
+      "enabled": true,
+      "chain": []
+    }
+  ]
+}

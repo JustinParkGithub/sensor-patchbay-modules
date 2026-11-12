@@ -1,0 +1,123 @@
+{
+  "name": "controller-tilt-keys",
+  "description": "Tilt a motion controller for WASD, A for space, shake for Esc",
+  "requires": [
+    {
+      "id": "controller",
+      "kind": "source",
+      "types": [
+        "controller"
+      ]
+    },
+    {
+      "id": "hid",
+      "kind": "sink",
+      "types": [
+        "hid"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "k_d",
+      "source": "controller/tilt.roll",
+      "sink": "hid/key.d",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": 20.0,
+            "off": 12.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "k_a",
+      "source": "controller/tilt.roll",
+      "sink": "hid/key.a",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": -20.0,
+            "off": -12.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "k_w",
+      "source": "controller/tilt.pitch",
+      "sink": "hid/key.w",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": -20.0,
+            "off": -12.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "k_s",
+      "source": "controller/tilt.pitch",
+      "sink": "hid/key.s",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "schmitt",
+          "params": {
+            "on": 20.0,
+            "off": 12.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "k_space",
+      "source": "controller/btn.a",
+      "sink": "hid/key.space",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "k_esc",
+      "source": "controller/accel.mag",
+      "sink": "hid/key.esc",
+      "enabled": true,
+      "chain": [
+        {
+          "type": "threshold",
+          "params": {
+            "level": 2.5,
+            "mode": "gt"
+          }
+        },
+        {
+          "type": "debounce",
+          "params": {
+            "ms": 400.0
+          }
+        },
+        {
+          "type": "hold",
+          "params": {
+            "ms": 60.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "k_preset",
+      "source": "controller/btn.guide",
+      "sink": "sys/preset.cycle",
+      "enabled": true,
+      "chain": []
+    }
+  ]
+}
