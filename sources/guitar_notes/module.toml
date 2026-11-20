@@ -1,0 +1,10 @@
+# Note names from the ESP-IDF guitar tuner, over USB serial.
+kind = "source"
+description = "Guitar notes from the ESP32 tuner (one note name per line over USB serial): a gate per note E2-E6, plus MIDI number, Hz and fret"
+version = "1.0.0"
+python = ["pyserial>=3.5"]   # imported as `serial`
+system = [
+  "flash the guitar_tuner ESP-IDF project (pio run -t upload)",
+  "Linux: user in 'dialout' (or 'uucp') for /dev/ttyUSB* / /dev/ttyACM*",
+  "close `pio device monitor` first: only one program can hold the port",
+]

@@ -117,6 +117,40 @@
    ]
   },
   {
+   "name": "guitar_notes",
+   "kind": "source",
+   "description": "Guitar notes from the ESP32 tuner (one note name per line over USB serial): a gate per note E2-E6, plus MIDI number, Hz and fret",
+   "version": "1.0.0",
+   "entry": "__init__.py",
+   "depends": [],
+   "python": [
+    "pyserial>=3.5"
+   ],
+   "system": [
+    "flash the guitar_tuner ESP-IDF project (pio run -t upload)",
+    "Linux: user in 'dialout' (or 'uucp') for /dev/ttyUSB* / /dev/ttyACM*",
+    "close `pio device monitor` first: only one program can hold the port"
+   ],
+   "digest": "9a5631e66c3f1aa4dd43f310597947e7838d933156725123a2a7cdce28e47526",
+   "files": [
+    {
+     "path": "sources/guitar_notes/README.md",
+     "sha256": "0977c2c0966650df8a22d07ff51269e7c290903902b183f32a8447887a24e6b8",
+     "size": 2067
+    },
+    {
+     "path": "sources/guitar_notes/__init__.py",
+     "sha256": "95b41fb1388daba31b99301fa7573a4cb2e58c602b9f6f8f4ae99b44db654463",
+     "size": 8071
+    },
+    {
+     "path": "sources/guitar_notes/module.toml",
+     "sha256": "13e40554b25e7888fce1768cb1a51e07f6934082716f2efc4f1254cd1a5039d7",
+     "size": 517
+    }
+   ]
+  },
+  {
    "name": "hid",
    "kind": "sink",
    "description": "Virtual mouse + keyboard (pynput)",
@@ -260,6 +294,29 @@
    "path": "presets/controller-tilt-keys.json",
    "sha256": "ceab1a50122ed59c4b6f4c7b8e0acf838a0cea9401b11236fd8660ea6bdbf4f0",
    "size": 2278
+  },
+  {
+   "name": "guitar-fretboard",
+   "description": "Guitar notes as keys laid out like the neck: each keyboard row is a 12-fret octave of an E string (z-row = low E frets 0-11), each column a fret",
+   "requires": [
+    {
+     "id": "guitar_notes",
+     "kind": "source",
+     "types": [
+      "guitar_notes"
+     ]
+    },
+    {
+     "id": "hid",
+     "kind": "sink",
+     "types": [
+      "hid"
+     ]
+    }
+   ],
+   "path": "presets/guitar-fretboard.json",
+   "sha256": "26c1bc4a521ee4cd17b3ce4cd459302c15d0d985a658e36c3fd068934bf881fa",
+   "size": 7513
   }
  ]
 }
