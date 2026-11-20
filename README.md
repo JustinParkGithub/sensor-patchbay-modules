@@ -20,6 +20,7 @@ installs the modules it uses.
 | `guitar_notes` | source | ESP32 guitar tuner over USB serial: a gate per note E2–E6, plus MIDI number, Hz and fret. [README](sources/guitar_notes/README.md) |
 | `cv` | source | webcam hand tracking (OpenCV + MediaPipe). [README](sources/cv/README.md) |
 | `hid` | sink | virtual mouse + keyboard (pynput) |
+| `macos` | sink | macOS shortcuts: media + volume, brightness, Mission Control and Spaces (next/previous/numbered desktops), windows, apps, screenshots, lock, Focus modes and any Shortcuts-app shortcut. [README](sinks/macos/README.md) |
 
 Each module's own README (where it has one) covers its wiring, pairing and ports.
 

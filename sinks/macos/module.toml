@@ -1,0 +1,14 @@
+# macOS system shortcuts: media, volume, brightness, Mission Control, Spaces,
+# windows, screenshots, Focus modes and Shortcuts-app shortcuts.
+kind = "sink"
+description = "macOS shortcuts: media + volume, brightness, Mission Control, Spaces, windows, screenshots, Focus modes, any Shortcuts shortcut"
+version = "1.0.0"
+python = [
+  "pyobjc-framework-Quartz; sys_platform == 'darwin'",   # CGEventPost
+  "pyobjc-framework-Cocoa; sys_platform == 'darwin'",    # NSEvent for the media/brightness keys
+]
+system = [
+  "macOS: grant Accessibility to your terminal/IDE or the app (System Settings > Privacy & Security > Accessibility)",
+  "macOS: desktop.<n> needs 'Switch to Desktop n' on (System Settings > Keyboard > Keyboard Shortcuts > Mission Control)",
+  "macOS: focus.<mode> runs a Shortcuts-app shortcut you create once per mode (see README)",
+]

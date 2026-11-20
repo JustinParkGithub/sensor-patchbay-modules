@@ -177,6 +177,41 @@
      "size": 319
     }
    ]
+  },
+  {
+   "name": "macos",
+   "kind": "sink",
+   "description": "macOS shortcuts: media + volume, brightness, Mission Control, Spaces, windows, screenshots, Focus modes, any Shortcuts shortcut",
+   "version": "1.0.0",
+   "entry": "__init__.py",
+   "depends": [],
+   "python": [
+    "pyobjc-framework-Quartz; sys_platform == 'darwin'",
+    "pyobjc-framework-Cocoa; sys_platform == 'darwin'"
+   ],
+   "system": [
+    "macOS: grant Accessibility to your terminal/IDE or the app (System Settings > Privacy & Security > Accessibility)",
+    "macOS: desktop.<n> needs 'Switch to Desktop n' on (System Settings > Keyboard > Keyboard Shortcuts > Mission Control)",
+    "macOS: focus.<mode> runs a Shortcuts-app shortcut you create once per mode (see README)"
+   ],
+   "digest": "8f221398ccb730485ff559e6602736a150b6125475415b9e8621cfb38571f19f",
+   "files": [
+    {
+     "path": "sinks/macos/README.md",
+     "sha256": "cbded1c393f5720e5124754ca8d0d2543f7d20f902d313f2c85f39b4e99d3530",
+     "size": 3835
+    },
+    {
+     "path": "sinks/macos/__init__.py",
+     "sha256": "6eed7e3b7ae8fe6fbecdb777abc187e1a6f61db239e8dc1485e3fed52eb21ce8",
+     "size": 16169
+    },
+    {
+     "path": "sinks/macos/module.toml",
+     "sha256": "a3b1ea099c7861dd51a349cea57347319832d1ae594ba7cbfa8806f338f1a239",
+     "size": 848
+    }
+   ]
   }
  ],
  "presets": [
