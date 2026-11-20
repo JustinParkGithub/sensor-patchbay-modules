@@ -17,6 +17,7 @@ installs the modules it uses.
 |---|---|---|
 | `controller` | source | any game controller via SDL2: Xbox, PlayStation (DualShock 4, DualSense), Switch Pro and Joy-Cons, 8BitDo, Steam, generic DInput. Motion (gyro, accelerometer, tilt) and touchpad where the pad has them. [README](sources/controller/README.md) |
 | `bend4` | source | Arduino Nano + four flex sensors over USB serial (sketch in `firmware/`) |
+| `guitar_notes` | source | ESP32 guitar tuner over USB serial: a gate per note E2–E6, plus MIDI number, Hz and fret. [README](sources/guitar_notes/README.md) |
 | `cv` | source | webcam hand tracking (OpenCV + MediaPipe). [README](sources/cv/README.md) |
 | `hid` | sink | virtual mouse + keyboard (pynput) |
 
@@ -31,6 +32,7 @@ Each module's own README (where it has one) covers its wiring, pairing and ports
 | `controller-air-mouse` | point a motion controller (PlayStation, Switch) to move the cursor. RT clicks, RB right-clicks, the right stick scrolls, a wrist flick is *forward* | `controller`, `hid` |
 | `controller-tilt-keys` | tilt a motion controller for W/A/S/D (20° on, 12° off), A for Space, shake for Esc | `controller`, `hid` |
 | `bend4-mouse-keyboard` | bend fingers to look left/right (mouse), walk forward (W) and jump (Space) | `bend4`, `hid` |
+| `guitar-fretboard` | play notes to type: each keyboard row is a 12-fret octave of an E string and each column a fret (bottom row = low E, frets 0–11) | `guitar_notes`, `hid` |
 
 The controller presets cycle to the next preset on the Guide (Xbox / PS / Home)
 button, except `controller-mouse-keyboard`, which uses Back.

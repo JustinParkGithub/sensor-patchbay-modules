@@ -1,0 +1,365 @@
+{
+  "name": "guitar-fretboard",
+  "description": "Guitar notes as keys laid out like the neck: each keyboard row is a 12-fret octave of an E string (z-row = low E frets 0-11), each column a fret",
+  "requires": [
+    {
+      "id": "guitar_notes",
+      "kind": "source",
+      "types": [
+        "guitar_notes"
+      ]
+    },
+    {
+      "id": "hid",
+      "kind": "sink",
+      "types": [
+        "hid"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "n40_E2",
+      "source": "guitar_notes/note.E2",
+      "sink": "hid/key.z",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n41_F2",
+      "source": "guitar_notes/note.F2",
+      "sink": "hid/key.x",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n42_Fs2",
+      "source": "guitar_notes/note.Fs2",
+      "sink": "hid/key.c",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n43_G2",
+      "source": "guitar_notes/note.G2",
+      "sink": "hid/key.v",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n44_Gs2",
+      "source": "guitar_notes/note.Gs2",
+      "sink": "hid/key.b",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n45_A2",
+      "source": "guitar_notes/note.A2",
+      "sink": "hid/key.n",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n46_As2",
+      "source": "guitar_notes/note.As2",
+      "sink": "hid/key.m",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n47_B2",
+      "source": "guitar_notes/note.B2",
+      "sink": "hid/key.,",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n48_C3",
+      "source": "guitar_notes/note.C3",
+      "sink": "hid/key..",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n49_Cs3",
+      "source": "guitar_notes/note.Cs3",
+      "sink": "hid/key./",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n50_D3",
+      "source": "guitar_notes/note.D3",
+      "sink": "hid/key.shift_r",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n51_Ds3",
+      "source": "guitar_notes/note.Ds3",
+      "sink": "hid/key.up",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n52_E3",
+      "source": "guitar_notes/note.E3",
+      "sink": "hid/key.a",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n53_F3",
+      "source": "guitar_notes/note.F3",
+      "sink": "hid/key.s",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n54_Fs3",
+      "source": "guitar_notes/note.Fs3",
+      "sink": "hid/key.d",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n55_G3",
+      "source": "guitar_notes/note.G3",
+      "sink": "hid/key.f",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n56_Gs3",
+      "source": "guitar_notes/note.Gs3",
+      "sink": "hid/key.g",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n57_A3",
+      "source": "guitar_notes/note.A3",
+      "sink": "hid/key.h",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n58_As3",
+      "source": "guitar_notes/note.As3",
+      "sink": "hid/key.j",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n59_B3",
+      "source": "guitar_notes/note.B3",
+      "sink": "hid/key.k",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n60_C4",
+      "source": "guitar_notes/note.C4",
+      "sink": "hid/key.l",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n61_Cs4",
+      "source": "guitar_notes/note.Cs4",
+      "sink": "hid/key.;",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n62_D4",
+      "source": "guitar_notes/note.D4",
+      "sink": "hid/key.'",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n63_Ds4",
+      "source": "guitar_notes/note.Ds4",
+      "sink": "hid/key.enter",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n64_E4",
+      "source": "guitar_notes/note.E4",
+      "sink": "hid/key.q",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n65_F4",
+      "source": "guitar_notes/note.F4",
+      "sink": "hid/key.w",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n66_Fs4",
+      "source": "guitar_notes/note.Fs4",
+      "sink": "hid/key.e",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n67_G4",
+      "source": "guitar_notes/note.G4",
+      "sink": "hid/key.r",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n68_Gs4",
+      "source": "guitar_notes/note.Gs4",
+      "sink": "hid/key.t",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n69_A4",
+      "source": "guitar_notes/note.A4",
+      "sink": "hid/key.y",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n70_As4",
+      "source": "guitar_notes/note.As4",
+      "sink": "hid/key.u",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n71_B4",
+      "source": "guitar_notes/note.B4",
+      "sink": "hid/key.i",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n72_C5",
+      "source": "guitar_notes/note.C5",
+      "sink": "hid/key.o",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n73_Cs5",
+      "source": "guitar_notes/note.Cs5",
+      "sink": "hid/key.p",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n74_D5",
+      "source": "guitar_notes/note.D5",
+      "sink": "hid/key.[",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n75_Ds5",
+      "source": "guitar_notes/note.Ds5",
+      "sink": "hid/key.]",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n76_E5",
+      "source": "guitar_notes/note.E5",
+      "sink": "hid/key.1",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n77_F5",
+      "source": "guitar_notes/note.F5",
+      "sink": "hid/key.2",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n78_Fs5",
+      "source": "guitar_notes/note.Fs5",
+      "sink": "hid/key.3",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n79_G5",
+      "source": "guitar_notes/note.G5",
+      "sink": "hid/key.4",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n80_Gs5",
+      "source": "guitar_notes/note.Gs5",
+      "sink": "hid/key.5",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n81_A5",
+      "source": "guitar_notes/note.A5",
+      "sink": "hid/key.6",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n82_As5",
+      "source": "guitar_notes/note.As5",
+      "sink": "hid/key.7",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n83_B5",
+      "source": "guitar_notes/note.B5",
+      "sink": "hid/key.8",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n84_C6",
+      "source": "guitar_notes/note.C6",
+      "sink": "hid/key.9",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n85_Cs6",
+      "source": "guitar_notes/note.Cs6",
+      "sink": "hid/key.0",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n86_D6",
+      "source": "guitar_notes/note.D6",
+      "sink": "hid/key.-",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n87_Ds6",
+      "source": "guitar_notes/note.Ds6",
+      "sink": "hid/key.=",
+      "enabled": true,
+      "chain": []
+    },
+    {
+      "id": "n88_E6",
+      "source": "guitar_notes/note.E6",
+      "sink": "hid/key.backspace",
+      "enabled": true,
+      "chain": []
+    }
+  ]
+}
