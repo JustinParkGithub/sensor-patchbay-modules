@@ -38,7 +38,7 @@
    "name": "controller",
    "kind": "source",
    "description": "Any game controller via SDL2: Xbox, PlayStation, Switch Pro / Joy-Con, 8BitDo, generic; motion + touchpad where the pad has them",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "entry": "__init__.py",
    "depends": [],
    "python": [
@@ -49,7 +49,7 @@
     "pair over Bluetooth or plug in over USB",
     "Linux: user access to /dev/input/event* and /dev/hidraw* (the `input` group, or a uaccess udev rule) - hidraw is what gives SDL motion and touchpad on PlayStation and Switch pads"
    ],
-   "digest": "4717c019ac3e16513f90950d8363bee35988d06c0c91219dca79053c2722bc5b",
+   "digest": "088f2b1e0a58f12e36dff6c5d9b601fbfa6f99049d044a56aa87a210e2866fb7",
    "files": [
     {
      "path": "sources/controller/README.md",
@@ -58,12 +58,12 @@
     },
     {
      "path": "sources/controller/__init__.py",
-     "sha256": "34c52b010a4c913b4e3e7080a07b98809fbf8c3e994ac4bacbc6c048b6a99d03",
-     "size": 18556
+     "sha256": "a23c75112a0f08f57627bb685fa12fe75b611efc4a3e88a599c842196116cbf6",
+     "size": 19900
     },
     {
      "path": "sources/controller/module.toml",
-     "sha256": "27cd2cbba14e8094505b06b4e7dc588da022a826708ebd70d20b2afc88505fff",
+     "sha256": "10455a50c2cc02ce228d5e3a8e06800ef96301e79b8db832eed6927fa247ea6a",
      "size": 630
     }
    ]

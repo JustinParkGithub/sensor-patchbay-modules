@@ -22,13 +22,48 @@ source can be added before the controller is connected.
 from __future__ import annotations
 
 import ctypes
+import importlib.util
 import math
+import os
+import sys
 import threading
 import time
+import warnings
 
 from engine.registry import register_source
 from engine.signals import PortSpec, SCALAR, EVENT
 from sources.base import Source
+
+
+
+def _share_sdl_with_opencv():
+    """Load the SDL2 that OpenCV already bundles, when it does, instead of
+    pysdl2-dll's copy.
+
+    The macOS opencv(-contrib)-python wheels ship their own libSDL2 in
+    ``cv2/.dylibs`` (FFmpeg links it). With the ``cv`` source also enabled, both
+    copies end up in one process and the Objective-C runtime warns that
+    ``SDLApplication``/``SDLAppDelegate`` are implemented twice, which can crash.
+    Pointing pysdl2 at OpenCV's file makes both load the same image, whichever
+    is imported first. ``find_spec`` locates cv2 without importing it. An
+    explicit ``PYSDL2_DLL_PATH`` always wins.
+    """
+    if sys.platform != "darwin" or os.environ.get("PYSDL2_DLL_PATH"):
+        return
+    try:
+        spec = importlib.util.find_spec("cv2")
+    except (ImportError, ValueError):
+        return
+    for root in (spec.submodule_search_locations or []) if spec else []:
+        dylibs = os.path.join(root, ".dylibs")
+        if os.path.isfile(os.path.join(dylibs, "libSDL2-2.0.0.dylib")):
+            os.environ["PYSDL2_DLL_PATH"] = dylibs
+            return
+
+
+_share_sdl_with_opencv()
+# pysdl2 announces where it found SDL on every import; that's not a problem
+warnings.filterwarnings("ignore", message="Using SDL2 binaries from pysdl2-dll")
 
 _MOTION = "PlayStation / Switch pads; 0 on pads without sensors"
 _TOUCH = "PlayStation touchpad, first finger"
