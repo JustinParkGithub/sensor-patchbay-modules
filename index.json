@@ -4,8 +4,8 @@
   {
    "name": "bend4",
    "kind": "source",
-   "description": "Arduino Nano + four flex sensors over USB serial",
-   "version": "1.0.0",
+   "description": "Arduino Nano (RP2040 Connect) + four flex sensors and a pushbutton over USB serial",
+   "version": "1.1.0",
    "entry": "__init__.py",
    "depends": [],
    "python": [
@@ -15,22 +15,22 @@
     "flash firmware/bend4_nano/bend4_nano.ino",
     "Linux: your user in the `dialout` group for serial access"
    ],
-   "digest": "45156cf587156416bc94f97bb175eb0d2f5f13667ab30c36f9e15fce102489b1",
+   "digest": "ab4578524eba19cf29af66fd5289f4c9bfaa6f7d1063958230cb04cff0bce389",
    "files": [
     {
      "path": "sources/bend4/__init__.py",
-     "sha256": "ef2cfc329232e43050118ae4f07a1461dcf0f98553996bd637253cf57edabd10",
-     "size": 9518
+     "sha256": "c24c951813fe16b48f42b335fbd3e6d4c2523ae5231e95bf5bf8faa45f15a9c0",
+     "size": 10447
     },
     {
      "path": "sources/bend4/firmware/bend4_nano/bend4_nano.ino",
-     "sha256": "f3ada2ea80313146787253e5bfb7c1d0e7d56e96cf8a3d7200ddfe8f1a8fa092",
-     "size": 1434
+     "sha256": "87e187c14cc2da2ed4fcaa045be75ecaafc9d0593b5f1e22625e7b7f8c5458e0",
+     "size": 2358
     },
     {
      "path": "sources/bend4/module.toml",
-     "sha256": "4332b89f8d348498621c60ce0dc2a56f91d7e0dbff111f6cd9154d6c32917d90",
-     "size": 321
+     "sha256": "913aa5dd9078af49162021662b025e77ce84e794aa7ce8be9568dbead1fba6bb",
+     "size": 370
     }
    ]
   },

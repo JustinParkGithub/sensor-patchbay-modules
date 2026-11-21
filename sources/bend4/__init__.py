@@ -1,16 +1,19 @@
-"""Arduino Nano + 4 bend/flex sensors over USB serial.
+"""Arduino Nano (RP2040 Connect) + 4 bend/flex sensors + a pushbutton over USB serial.
 
 Pairs with ``sources/bend4/firmware/bend4_nano/bend4_nano.ino`` — four flex sensors wired to
-analog pins A2-A5, read as 10-bit ADC values (0-1023) and streamed one
-whitespace-separated line per sample::
+analog pins A2-A5, read as 10-bit ADC values (0-1023), and a pushbutton on D2,
+streamed one whitespace-separated line per sample::
 
-    raw2    raw3    raw4    raw5\\n
+    raw0    raw1    raw2    raw3    PRESSED|RELEASED\\n
 
-one frame = four ints. The four channels are exposed in wire order (A2, A3, A4,
-A5) as ``bend.0 .. bend.3``, plus a derived ``bend.max`` (the most-bent of the
-four, handy as a single "anything bent?" signal). Any line that doesn't parse to
-exactly four ints is silently skipped, so a startup banner or a torn frame never
-corrupts a real sample; it just costs one frame.
+one frame = four ints plus an optional button column. The four channels are
+exposed in wire order (A2, A3, A4, A5) as ``bend.0 .. bend.3``, plus a derived
+``bend.max`` (the most-bent of the four, handy as a single "anything bent?"
+signal). The button is the ``button`` gate (1 while pressed); the fifth column
+may be ``PRESSED``/``RELEASED`` or ``1``/``0``. Sketches with ``STREAM_BUTTON =
+false`` (or the original four-column sketch) still work: the button just stays
+at 0. Any other line is silently skipped, so a startup banner or a torn frame
+never corrupts a real sample; it just costs one frame.
 
 Note the baud: the sketch uses ``Serial.begin(9600)``, so this source defaults
 to 9600 (not 115200 like the BMI160 one). Change both sides together if you
@@ -30,11 +33,14 @@ import threading
 import time
 
 from engine.registry import register_source
-from engine.signals import PortSpec, SCALAR
+from engine.signals import EVENT, PortSpec, SCALAR
 from sources.base import Source
 
 ADC_MAX = 1023.0          # 10-bit ADC full scale
 N_CHANNELS = 4            # A2, A3, A4, A5
+
+# Accepted spellings of the optional fifth (button) column.
+_BUTTON_WORDS = {"pressed": 1.0, "released": 0.0, "1": 1.0, "0": 0.0}
 
 
 def _as_bool(v) -> bool:
@@ -49,6 +55,7 @@ _KNOWN_VID_PID = {
     (0x0403, 0x6001),  # FTDI FT232
     (0x10C4, 0xEA60),  # CP2102/CP2104
     (0x2341, 0x0043),  # genuine Arduino Uno/Nano (some clones)
+    (0x2341, 0x005E),  # Arduino Nano RP2040 Connect
 }
 
 PORTS = [
@@ -57,6 +64,7 @@ PORTS = [
     PortSpec("bend.2", SCALAR, "bend.2 (A4)", "flex", "", "0 flat .. 1 fully bent"),
     PortSpec("bend.3", SCALAR, "bend.3 (A5)", "flex", "", "0 flat .. 1 fully bent"),
     PortSpec("bend.max", SCALAR, "bend.max", "derived", "", "most-bent of the four channels"),
+    PortSpec("button", EVENT, "button (D2)", "button", "", "1 while the pushbutton is pressed"),
 ]
 
 
@@ -79,7 +87,7 @@ def _autodetect_port():
 class ArduinoBend4(Source):
     type = "bend4"
     id = "bend4"
-    label = "4-Way Bend Sensor (Arduino Nano)"
+    label = "4-Way Bend Sensor + Button (Arduino Nano)"
     PORTS = PORTS
 
     @classmethod
@@ -112,7 +120,7 @@ class ArduinoBend4(Source):
         self._max = [None] * N_CHANNELS
         self._stop = threading.Event()
         self._thread = None
-        self._frames = 0        # valid 4-int frames parsed since start
+        self._frames = 0        # valid frames parsed since start
         self._unparsed = 0      # consecutive non-empty lines that didn't parse
         self._warned_format = False
 
@@ -157,7 +165,7 @@ class ArduinoBend4(Source):
     def status(self):
         if not self._ok:
             return "disconnected"
-        # Bytes are arriving but nothing parses as a 4-int frame — almost always
+        # Bytes are arriving but nothing parses as a frame — almost always
         # the wrong sketch or a baud mismatch. Say so rather than reporting "ok"
         # while every port silently reads its initial 0.
         if self._frames == 0 and self._unparsed > 0:
@@ -209,11 +217,16 @@ class ArduinoBend4(Source):
         text = line.decode("ascii", "ignore").strip()
         parts = text.split()  # sketch separates columns with runs of spaces
         ints = None
-        if len(parts) == N_CHANNELS:
+        button = 0.0
+        if len(parts) in (N_CHANNELS, N_CHANNELS + 1):
             try:
-                ints = tuple(int(x) for x in parts)
+                ints = tuple(int(x) for x in parts[:N_CHANNELS])
             except ValueError:
                 ints = None
+            if ints is not None and len(parts) > N_CHANNELS:
+                button = _BUTTON_WORDS.get(parts[N_CHANNELS].lower())
+                if button is None:
+                    ints = None  # unknown fifth column: not one of our frames
         if ints is None:
             # Not a data frame. A '#'-prefixed banner is tolerated; anything else
             # that keeps coming means the wrong sketch or baud. Warn once (only
@@ -225,7 +238,7 @@ class ArduinoBend4(Source):
                         and not self._warned_format):
                     self._warned_format = True
                     print(f"[bend4] receiving data on {self._port_arg} but no "
-                          f"line parses as four ints (got e.g. {text!r}). Wrong "
+                          f"line parses as four ints (+ button) (got e.g. {text!r}). Wrong "
                           f"sketch, or baud != {self._baud}? Upload "
                           "sources/bend4/firmware/bend4_nano/bend4_nano.ino.")
             return  # a banner line or a torn frame; wait for the next one
@@ -235,5 +248,6 @@ class ArduinoBend4(Source):
         vals = [self._normalise(i, raw) for i, raw in enumerate(ints)]
         out = {f"bend.{i}": v for i, v in enumerate(vals)}
         out["bend.max"] = max(vals)
+        out["button"] = button
         with self._lock:
             self._latest = out

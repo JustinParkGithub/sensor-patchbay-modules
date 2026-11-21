@@ -16,7 +16,7 @@ installs the modules it uses.
 | type | kind | what |
 |---|---|---|
 | `controller` | source | any game controller via SDL2: Xbox, PlayStation (DualShock 4, DualSense), Switch Pro and Joy-Cons, 8BitDo, Steam, generic DInput. Motion (gyro, accelerometer, tilt) and touchpad where the pad has them. [README](sources/controller/README.md) |
-| `bend4` | source | Arduino Nano + four flex sensors over USB serial (sketch in `firmware/`) |
+| `bend4` | source | Arduino Nano (RP2040 Connect) + four flex sensors and a pushbutton (`button` gate) over USB serial (sketch in `firmware/`) |
 | `guitar_notes` | source | ESP32 guitar tuner over USB serial: a gate per note E2–E6, plus MIDI number, Hz and fret. [README](sources/guitar_notes/README.md) |
 | `cv` | source | webcam hand tracking (OpenCV + MediaPipe). [README](sources/cv/README.md) |
 | `hid` | sink | virtual mouse + keyboard (pynput) |

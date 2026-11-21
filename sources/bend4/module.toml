@@ -1,7 +1,7 @@
-# Arduino Nano + four flex sensors over USB serial; sketch in firmware/.
+# Arduino Nano + four flex sensors + a pushbutton over USB serial; sketch in firmware/.
 kind = "source"
-description = "Arduino Nano + four flex sensors over USB serial"
-version = "1.0.0"
+description = "Arduino Nano (RP2040 Connect) + four flex sensors and a pushbutton over USB serial"
+version = "1.1.0"
 python = ["pyserial>=3.5"]
 system = [
   "flash firmware/bend4_nano/bend4_nano.ino",
